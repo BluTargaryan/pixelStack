@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import register from './api/register.js';
+import register from './api/auth/register.js';
+import mongoose from 'mongoose';
 
 dotenv.config();
 
@@ -8,7 +9,14 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
-app.use('/api', register);
+app.use('/api/auth', register);
+
+mongoose.connect(process.env.MONGODB_URI)
+.then(() => {
+    console.log('Connected to MongoDB');
+}).catch((error) => {
+    console.log('Error connecting to MongoDB', error.message);
+});
 
 
 app.listen(port, () => {
