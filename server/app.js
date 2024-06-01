@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import register from './api/auth/register.js';
 import login from './api/auth/login.js';
 import profile from './api/auth/profile.js';
+import logout from './api/auth/logout.js';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 
@@ -17,6 +18,7 @@ app.use(cookieParser());
 app.use('/api/auth', register);
 app.use('/api/auth', login);
 app.use('/api/auth', profile);
+app.use('/api/auth', logout);
 
 mongoose.connect(process.env.MONGODB_URI)
 .then(() => {
