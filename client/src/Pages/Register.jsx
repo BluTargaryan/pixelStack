@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Input from '../Components/Input'
 import Button from '../Components/Button'
 import axios from 'axios'
+import { ToastContainer, toast, Slide } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
 
@@ -17,15 +19,51 @@ const Register = () => {
             password: password
         })
             .then((response) => {
-                console.log(response.data);
+                if (response.status === 200) {
+                    toast.success('Registered', {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Slide,
+                    });
+                    console.log(response.status, response.message)
+                }
             })
             .catch((error) => {
-                console.log(error);
+                toast.error('User already exists!', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Slide,
+                });
+                console.log(error.status, error.message)
             });
     }
 
     return (
         <React.Fragment>
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition:Slide
+            />
             <div className='tw-w-full tw-my-5 tw-mb-16'>
                 <div className='tw-flex tw-flex-col tw-justify-center tw-items-center'>
                     <div className='tw-mx-0 tw-text-center tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full tw-gap-3'>
