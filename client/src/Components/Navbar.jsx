@@ -1,33 +1,57 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import Modal from './Modal'
+import Button from './Button'
+import Input from './Input'
+import Register from '../Pages/Register'
+import Login from '../Pages/Login'
 
-const Navbar = () => {
+const Navbar = ({ navBg }) => {
+    const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+    const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+
+    const openSignInModal = () => setIsSignInModalOpen(true);
+    const closeSignInModal = () => setIsSignInModalOpen(false);
+
+    const openSignUpModal = () => setIsSignUpModalOpen(true);
+    const closeSignUpModal = () => setIsSignUpModalOpen(false);
     return (
         <>
-            <nav className="navbar navbar-expand-lg p-md-4 px-md-0 px-2 tw-bg-amber-400">
+            <nav className={`navbar navbar-expand-lg p-md-4 px-md-0 px-2 ${navBg}`}>
                 <div className="container">
-                    <a className="navbar-brand tw-font-bold md:tw-text-3xl tw-text-2xl" href="#">PixelStack</a>
+                    <Link className="navbar-brand tw-font-bold md:tw-text-3xl tw-text-2xl" to="/">PixelStack</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navLink" aria-controls="navLink" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navLink">
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0 tw-gap-2 tw-font-sans tw-tracking-tighter tw-font-medium">
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Home</a>
+                                <Link className="nav-link" to="/">Home</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Explore</a>
+                                <Link className="nav-link" to="/explore">Explore</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">About</a>
+                                <Link className="nav-link" to="/about">About</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Contact</a>
+                                <Link className="nav-link" to="/contact">Contact</Link>
                             </li>
                             <li className="nav-item">
-                                <button className='btn btn-outline-dark tw-rounded-full focus-ring focus-ring-dark tw-px-4' >Sign in</button>
+                                <Button onClick={openSignInModal}>
+                                    {"Sign in"}
+                                </Button>
+                                <Modal isOpen={isSignInModalOpen} onClose={closeSignInModal}>
+                                    <Login />
+                                </Modal>
                             </li>
                             <li className="nav-item">
-                                <button className='btn btn-dark tw-rounded-full focus-ring focus-ring-dark tw-px-4' >Get started</button>
+                                <Button variant={"dark"} onClick={openSignUpModal}>
+                                    {"Get Started"}
+                                </Button>
+                                <Modal isOpen={isSignUpModalOpen} onClose={closeSignUpModal}>
+                                    <Register />
+                                </Modal>
                             </li>
                         </ul>
                     </div>

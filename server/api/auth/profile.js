@@ -14,10 +14,7 @@ router.get("/profile", async (req, res) => {
     }
     try {
         const decoded = await jwt.verify(token, process.env.JWT_SECRET);
-        console.log('Decoded token:', decoded);
-
         const user = await User.findById(decoded.id);
-        console.log('User:', user);
         
         if (!user) {
             return res.status(404).json({

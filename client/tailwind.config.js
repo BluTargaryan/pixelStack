@@ -9,7 +9,12 @@ export default {
       sans: ['Work Sans', 'sans-serif'],
       serif: ['Playfair Display', 'serif'],
     },
-    extend: {},
+    extend: {
+      colors: {
+        dark: "#212529",
+        light: "#ffeeee"
+      }
+    },
   },
   plugins: [],
   prefix: 'tw-',
