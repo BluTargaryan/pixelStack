@@ -5,7 +5,7 @@ import BlogItem from '../Components/BlogItem'
 const Home = () => {
     return (
         <>
-            <Navbar navBg={'tw-bg-amber-400'}/>
+            <Navbar navBg={'tw-bg-amber-400'} isLogin={false}/>
             <div className='tw-border-b-[1px] tw-border-b-black'></div>
             <section className='tw-bg-amber-400'>
                 <div className="container tw-py-32">

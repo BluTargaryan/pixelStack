@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Modal from './Modal'
 import Button from './Button'
-import Input from './Input'
 import Register from '../Pages/Register'
 import Login from '../Pages/Login'
+import axios from 'axios'
 
-const Navbar = ({ navBg }) => {
+const Navbar = ({ navBg, isLogin }) => {
     const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
     const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
 
@@ -15,6 +15,18 @@ const Navbar = ({ navBg }) => {
 
     const openSignUpModal = () => setIsSignUpModalOpen(true);
     const closeSignUpModal = () => setIsSignUpModalOpen(false);
+
+    const handleLogout = () => {
+        axios.post("http://localhost:3000/api/auth/logout", {}, {
+            withCredentials: true
+        })
+            .then((res) => {
+                window.location.href = "/";
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
     return (
         <>
             <nav className={`navbar navbar-expand-lg p-md-4 px-md-0 px-2 ${navBg}`}>
@@ -37,22 +49,33 @@ const Navbar = ({ navBg }) => {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/contact">Contact</Link>
                             </li>
-                            <li className="nav-item">
-                                <Button onClick={openSignInModal}>
-                                    {"Sign in"}
-                                </Button>
-                                <Modal isOpen={isSignInModalOpen} onClose={closeSignInModal}>
-                                    <Login />
-                                </Modal>
-                            </li>
-                            <li className="nav-item">
-                                <Button variant={"dark"} onClick={openSignUpModal}>
-                                    {"Get Started"}
-                                </Button>
-                                <Modal isOpen={isSignUpModalOpen} onClose={closeSignUpModal}>
-                                    <Register />
-                                </Modal>
-                            </li>
+                            {isLogin && (
+                                <li className="nav-item">
+                                    <Button variant={"dark"} onClick={handleLogout}>
+                                        Logout
+                                    </Button>
+                                </li>
+                            )}
+                            {!isLogin && (
+                                <>
+                                    <li className="nav-item">
+                                        <Button onClick={openSignInModal}>
+                                            {"Sign in"}
+                                        </Button>
+                                        <Modal isOpen={isSignInModalOpen} onClose={closeSignInModal}>
+                                            <Login />
+                                        </Modal>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Button variant={"dark"} onClick={openSignUpModal}>
+                                            {"Get Started"}
+                                        </Button>
+                                        <Modal isOpen={isSignUpModalOpen} onClose={closeSignUpModal}>
+                                            <Register />
+                                        </Modal>
+                                    </li>
+                                </>
+                            )}
                         </ul>
                     </div>
                 </div>

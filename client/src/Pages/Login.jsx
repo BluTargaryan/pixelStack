@@ -35,6 +35,7 @@ const Login = () => {
           theme: "light",
           transition: Slide,
         });
+        localStorage.setItem('token', response.data.token);
         window.location.href = '/';
       }
       console.log(response.data)
