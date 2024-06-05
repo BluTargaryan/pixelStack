@@ -23,7 +23,8 @@ router.post("/login", async (req, res) => {
             });
         }
         const token = jwt.sign({ 
-            id: user._id 
+            id: user._id,
+            email: user.email
         }, process.env.JWT_SECRET);
         res.cookie("token", token);
         res.status(200).json({
@@ -32,12 +33,12 @@ router.post("/login", async (req, res) => {
             token,
             user: {
                 id: user._id,
-                firstName: user.firstName,
-                lastName: user.lastName,
+                name: user.name,
                 email: user.email
             }
         });
     } catch (error) {
+        console.log(error)
         res.status(400).json({
             status: 400,
             message: "Login failed",
