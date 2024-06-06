@@ -1,15 +1,28 @@
 import React, { useEffect } from 'react'
-import Button from '../Components/Button'
 import Navbar from '../Components/Navbar'
+import useProfile from '../hooks/useProfile'
 
-const Dashboard = ({ user }) => {
+const Dashboard = () => {
+  const { user, isLogin } = useProfile();
   useEffect(() => {
-    console.log(user)
+    document.title = `Welcome ${user.name
+        ? user.name
+        : user.email
+      }`
   }, [user])
   return (
     <>
-      <Navbar isLogin={true} />
-      {user.name.split(' ')[0]}
+      <Navbar isLogin={isLogin} />
+      <hr />
+      <div className="container">
+        <h3 className='tw-text-3xl tw-font-sans tw-mt-4 tw-tracking-tighter'>
+          Welcome {
+            user.name
+              ? user.name
+              : user.email
+          }
+        </h3>
+      </div>
     </>
   )
 }
