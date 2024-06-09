@@ -10,9 +10,11 @@ const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleClick = (e) => {
         e.preventDefault();
+        setLoading(true);
         axios.post('http://localhost:3000/api/auth/register', {
             name: name,
             email: email,
@@ -31,7 +33,8 @@ const Register = () => {
                         theme: "light",
                         transition: Slide,
                     });
-                    console.log(response.status, response.message)
+                    setLoading(false);
+                    window.location.href = '/';
                 }
             })
             .catch((error) => {
@@ -46,7 +49,7 @@ const Register = () => {
                     theme: "light",
                     transition: Slide,
                 });
-                console.log(error.status, error.message)
+                setLoading(false);
             });
     }
 
@@ -96,7 +99,7 @@ const Register = () => {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
-                                <Button variant={"dark"} type={"submit"} onClick={handleClick}>
+                                <Button variant={"dark"} disabled={loading} type={"submit"} onClick={handleClick}>
                                     Register
                                 </Button>
                             </div>

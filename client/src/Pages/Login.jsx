@@ -9,9 +9,11 @@ import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = useCallback(async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post('http://localhost:3000/api/auth/login', {
         email,
@@ -112,7 +114,7 @@ const Login = () => {
                     No account? <Link to="/register" className='tw-text-blue-500'>Register</Link>
                   </h5>
                 </span>
-                <Button variant={"dark"} onClick={handleLogin}>
+                <Button variant={"dark"} onClick={handleLogin} disabled={loading}>
                   Continue
                 </Button>
               </div>

@@ -9,6 +9,7 @@ import axios from 'axios'
 const Navbar = ({ navBg, isLogin }) => {
     const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
     const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const openSignInModal = () => setIsSignInModalOpen(true);
     const closeSignInModal = () => setIsSignInModalOpen(false);
@@ -17,6 +18,7 @@ const Navbar = ({ navBg, isLogin }) => {
     const closeSignUpModal = () => setIsSignUpModalOpen(false);
 
     const handleLogout = () => {
+        setLoading(true);
         axios.post("http://localhost:3000/api/auth/logout", {}, {
             withCredentials: true
         })
@@ -51,7 +53,7 @@ const Navbar = ({ navBg, isLogin }) => {
                             </li>
                             {isLogin && (
                                 <li className="nav-item">
-                                    <Button variant={"dark"} onClick={handleLogout}>
+                                    <Button variant={"dark"} onClick={handleLogout} disabled={loading}>
                                         Logout
                                     </Button>
                                 </li>
@@ -59,7 +61,7 @@ const Navbar = ({ navBg, isLogin }) => {
                             {!isLogin && (
                                 <>
                                     <li className="nav-item">
-                                        <Button onClick={openSignInModal}>
+                                        <Button onClick={openSignInModal} disabled={false}>
                                             {"Sign in"}
                                         </Button>
                                         <Modal isOpen={isSignInModalOpen} onClose={closeSignInModal}>
@@ -67,7 +69,7 @@ const Navbar = ({ navBg, isLogin }) => {
                                         </Modal>
                                     </li>
                                     <li className="nav-item">
-                                        <Button variant={"dark"} onClick={openSignUpModal}>
+                                        <Button variant={"dark"} onClick={openSignUpModal} disabled={false}>
                                             {"Get Started"}
                                         </Button>
                                         <Modal isOpen={isSignUpModalOpen} onClose={closeSignUpModal}>
