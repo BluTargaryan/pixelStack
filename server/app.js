@@ -1,9 +1,13 @@
 import express from 'express';
 import dotenv from 'dotenv';
+
 import register from './api/auth/register.js';
 import login from './api/auth/login.js';
 import profile from './api/auth/profile.js';
 import logout from './api/auth/logout.js';
+
+import createPost from './api/posts/createPost.js';
+
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
@@ -22,10 +26,13 @@ app.use(cors(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 app.use('/api/auth', register);
 app.use('/api/auth', login);
 app.use('/api/auth', profile);
 app.use('/api/auth', logout);
+
+app.use('/api/posts', createPost)
 
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {

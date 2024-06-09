@@ -14,13 +14,18 @@ const Dashboard = () => {
       <Navbar isLogin={isLogin} />
       <hr />
       <div className="container">
-        <h3 className='tw-text-3xl tw-font-sans tw-mt-4 tw-tracking-tighter'>
-          Welcome {
-            user.name
-              ? user.name
-              : user.email
-          }
-        </h3>
+        <div className="tw-flex tw-w-full tw-items-center tw-justify-between tw-my-5">
+          <h3 className='tw-text-3xl tw-font-sans tw-mt-4 tw-tracking-tighter'>
+            Welcome {
+              user.name
+                ? user.name
+                : user.email
+            }
+          </h3>
+          <Button variant='dark' onClick={() => { window.location.href = '/create' }}>
+            Create Post
+          </Button>
+        </div>
         <div className="tw-mt-3">
           <div className="row">
             <div className="col-md-6">

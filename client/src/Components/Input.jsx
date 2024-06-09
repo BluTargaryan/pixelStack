@@ -1,21 +1,22 @@
 import React from 'react'
 
-const Input = ({ onChange, value, label, type, id }) => {
+const Input = ({ onChange, value, label, type, id, align }) => {
     return (
         <>
             <div className=''>
                 <label
                     htmlFor={id}
-                    className='
+                    className={`
                         tw-bg-white
                         tw-text-sm
+                        tw-font-sans
                         tw-px-1
                         tw-text-gray-500
                         tw-transition-all
                         tw-duration-300
                         tw-ease-in-out
-                        tw-text-center
-                        tw-w-full'
+                        tw-text-${align ?? 'center'}
+                        tw-w-full`}
                 >
                     {label}
                 </label>
@@ -24,22 +25,23 @@ const Input = ({ onChange, value, label, type, id }) => {
                     id={id}
                     value={value}
                     onChange={onChange}
-                    className='
-                        tw-w-full 
-                        tw-py-2 
-                        tw-px-4 
-                        tw-text-sm 
-                        tw-text-gray-700 
-                        tw-border 
-                        tw-border-gray-300 
-                        tw-rounded-md 
-                        tw-shadow-sm 
-                        tw-mb-3 
-                        tw-focus:tw-outline-none 
-                        tw-focus:tw-ring-1 
-                        tw-focus:tw-ring-indigo-500 
+                    className={`
+                        tw-w-full
+                        tw-py-2
+                        tw-px-4
+                        tw-text-sm
+                        tw-font-sans
+                        tw-text-gray-700
+                        tw-border
+                        tw-border-gray-300
+                        tw-rounded-md
+                        tw-shadow-sm
+                        tw-mb-3
+                        tw-focus:tw-outline-none
+                        tw-focus:tw-ring-1
+                        tw-focus:tw-ring-indigo-500
                         tw-focus:tw-border-indigo-500
-                        tw-text-center'
+                        tw-text-${align ?? 'center'}`}
                     placeholder=''
                 />
 
