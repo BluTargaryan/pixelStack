@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-const Editor = () => {
-    const [value, setValue] = useState('');
+const Editor = ({value, onChange}) => {
 
     const modules = {
         toolbar: [
@@ -25,7 +24,7 @@ const Editor = () => {
             className='tw-font-sans tw-text-lg'
             theme="snow"
             value={value}
-            onChange={setValue}
+            onChange={onChange}
             modules={modules}
         />
     );

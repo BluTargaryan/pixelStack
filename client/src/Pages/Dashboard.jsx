@@ -3,6 +3,7 @@ import Navbar from '../Components/Navbar'
 import useProfile from '../hooks/useProfile'
 import BlogItem from '../Components/BlogItem';
 import Button from '../Components/Button';
+import { Link, Navigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const { user, isLogin } = useProfile();
@@ -22,8 +23,8 @@ const Dashboard = () => {
                 : user.email
             }
           </h3>
-          <Button variant='dark' onClick={() => { window.location.href = '/create' }}>
-            Create Post
+          <Button variant='dark'>
+            <Link to='/create'>Create Post</Link>
           </Button>
         </div>
         <div className="tw-mt-3">
@@ -37,9 +38,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <Button variant='dark'>
-          Click me
-        </Button>
       </div>
     </>
   )
