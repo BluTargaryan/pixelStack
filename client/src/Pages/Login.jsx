@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Input from '../Components/Input';
 import Button from '../Components/Button';
 import axios from 'axios';
@@ -10,6 +10,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   const handleLogin = useCallback(async (e) => {
     e.preventDefault();
@@ -38,11 +39,10 @@ const Login = () => {
           transition: Slide,
         });
         localStorage.setItem('token', response.data.token);
-        window.location.href = '/';
+        setLoading(false);
+        setRedirect(true);
       }
-      console.log(response.data)
     } catch (error) {
-      console.error('Failed to login:', error);
       if (error.response.data.status === 404) {
         toast.error('User not Found!!', {
           position: "top-right",
@@ -72,6 +72,10 @@ const Login = () => {
       }
     }
   }, [email, password]);
+
+  if (redirect) {
+    return <Navigate to="/dashboard" />
+  }
 
   return (
     <React.Fragment>

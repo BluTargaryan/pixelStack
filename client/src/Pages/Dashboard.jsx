@@ -1,22 +1,45 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../Components/Navbar'
 import useProfile from '../hooks/useProfile'
 import BlogItem from '../Components/BlogItem';
 import Button from '../Components/Button';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Dashboard = () => {
   const { user, isLogin } = useProfile();
+  const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
+
   useEffect(() => {
-    console.log(user)
-  }, [user])
+    if (!isLogin) {
+      navigate('/');
+    }
+
+    const fetchPost = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/posts/getPost', {
+          withCredentials: true
+        });
+        console.log(response.data.data)
+        setPosts(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchPost();
+
+  }, [isLogin, navigate]);
+
+
   return (
     <>
       <Navbar isLogin={isLogin} />
       <hr />
       <div className="container">
-        <div className="tw-flex tw-w-full tw-items-center tw-justify-between tw-my-5">
-          <h3 className='tw-text-3xl tw-font-sans tw-mt-4 tw-tracking-tighter'>
+        <div className="tw-flex tw-w-full md:tw-items-center md:tw-justify-between tw-justify-start tw-items-start tw-my-5 tw-flex-col md:tw-flex-row tw-gap-4 md:tw-gap-0">
+          <h3 className='md:tw-text-3xl tw-text-xl tw-font-sans tw-tracking-tighter'>
             Welcome {
               user.name
                 ? user.name
@@ -27,15 +50,13 @@ const Dashboard = () => {
             <Link to='/create'>Create Post</Link>
           </Button>
         </div>
-        <div className="tw-mt-3">
-          <div className="row">
-            <div className="col-md-6">
-              <BlogItem />
-              <BlogItem />
-            </div>
-            <div className="col-md-6">
-
-            </div>
+        <div className="tw-mt-10 tw-flex tw-justify-center">
+          <div className="md:tw-w-3/5 tw-w-full">
+            {
+              posts.length > 0 && posts.map(post => (
+                <BlogItem key={post._id} {...post} />
+              ))
+            }
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ import profile from './api/auth/profile.js';
 import logout from './api/auth/logout.js';
 
 import createPost from './api/posts/createPost.js';
+import getPost from './api/posts/getPost.js';
 
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
@@ -26,7 +27,7 @@ app.use(cors(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static('uploads'));
+app.use('/uploads', express.static('uploads'));
 
 app.use('/api/auth', register);
 app.use('/api/auth', login);
@@ -34,6 +35,7 @@ app.use('/api/auth', profile);
 app.use('/api/auth', logout);
 
 app.use('/api/posts', createPost)
+app.use('/api/posts', getPost)
 
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {

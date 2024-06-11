@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import Modal from './Modal'
 import Button from './Button'
 import Register from '../Pages/Register'
@@ -10,6 +10,7 @@ const Navbar = ({ navBg, isLogin }) => {
     const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
     const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [redirect, setRedirect] = useState(false);
 
     const openSignInModal = () => setIsSignInModalOpen(true);
     const closeSignInModal = () => setIsSignInModalOpen(false);
@@ -23,11 +24,17 @@ const Navbar = ({ navBg, isLogin }) => {
             withCredentials: true
         })
             .then((res) => {
-                window.location.href = "/";
+                console.log(res);
+                setLoading(false);
+                setRedirect(true);
             })
             .catch((err) => {
                 console.log(err);
             })
+    }
+
+    if (redirect) {
+        return <Navigate to="/" />
     }
     return (
         <>

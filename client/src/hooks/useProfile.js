@@ -6,6 +6,11 @@ export default function useProfile() {
     const [user, setUser] = useState({});
     const [error, setError] = useState(null);
     useEffect(() => {
+        const token = localStorage.getItem('token')
+        if (!token) {
+            setisLogin(false)
+            return;
+        }
         axios.get("http://localhost:3000/api/auth/profile", {
             withCredentials: true
         })

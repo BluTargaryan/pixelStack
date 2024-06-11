@@ -37,7 +37,7 @@ const CreatePost = () => {
         });
     }
     if (redirect) {
-        return (<Navigate to='/' />)
+        return (<Navigate to='/dashboard' />)
     }
 
     return (

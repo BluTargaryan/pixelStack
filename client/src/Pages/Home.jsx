@@ -19,9 +19,6 @@ const Home = () => {
             <div className="container tw-my-6">
                 <div className="tw-flex">
                     <div className="tw-flex tw-flex-col">
-                        <BlogItem />
-                        <BlogItem />
-                        <BlogItem />
                     </div>
                     <div className="tw-flex tw-flex-col">
                         <div className="tw-flex tw-gap-2 tw-flex-wrap tw-px-4">
