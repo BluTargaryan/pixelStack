@@ -4,6 +4,7 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Dashboard from "./Pages/Dashboard";
 import CreatePost from "./Pages/CreatePost";
+import BlogPost from "./Components/BlogPost";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create" element={<CreatePost />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
       </Routes>
     </BrowserRouter>
   );
