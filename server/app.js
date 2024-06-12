@@ -22,6 +22,7 @@ const port = process.env.PORT;
 app.use(cors(
     {
         origin: ['http://localhost:5173', 'https://pixel-stack.vercel.app'],
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true
     }
 ));
@@ -46,6 +47,11 @@ mongoose.connect(process.env.MONGODB_URI)
         console.log('Error connecting to MongoDB', error.message);
     });
 
+app.get('*', (req, res) => {
+    res.status(200).json({
+        message: 'hello world'
+    })
+})
 
 app.listen(port, () => {
     console.log(`Server is running on port http://localhost:${port}`);
