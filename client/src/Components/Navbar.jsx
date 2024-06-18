@@ -38,7 +38,7 @@ const Navbar = ({ navBg, isLogin }) => {
     }
     return (
         <>
-            <nav className={`navbar navbar-expand-lg p-md-4 px-md-0 px-2 ${navBg}`}>
+            <nav className={`navbar navbar-expand-lg p-md-4 px-md-0 px-2 ${navBg} tw-transition-all tw-duration-200`}>
                 <div className="container">
                     <Link className="navbar-brand tw-font-bold md:tw-text-3xl tw-text-2xl" to="/">PixelStack</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navLink" aria-controls="navLink" aria-expanded="false" aria-label="Toggle navigation">
