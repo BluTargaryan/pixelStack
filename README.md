@@ -70,3 +70,5 @@ The Blog content can be well formatted by making the use of [React Quill Text Ed
 This was the complete walkthough for PixelStack. This was a good project in MERN Stack which involved building everything from scratch.
 
 Feel free to checkout the repo and contribute any feature you wish to💫
+
+Clone this repo and use the Sample .env file to environment variables with your credentials in the server folder
