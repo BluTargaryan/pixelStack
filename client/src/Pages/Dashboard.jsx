@@ -3,17 +3,16 @@ import Navbar from '../Components/Navbar'
 import useProfile from '../hooks/useProfile'
 import BlogItem from '../Components/BlogItem';
 import Button from '../Components/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Dashboard = () => {
   const { user, isLogin } = useProfile();
-  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     if (!isLogin) {
-      navigate('/');
+      return <Navigate to='/' />
     }
 
     const fetchPost = async () => {
@@ -21,7 +20,6 @@ const Dashboard = () => {
         const response = await axios.get('http://localhost:3000/api/posts/getPost', {
           withCredentials: true
         });
-        console.log(response.data.data)
         setPosts(response.data.data);
       } catch (error) {
         console.error(error);
@@ -30,7 +28,7 @@ const Dashboard = () => {
 
     fetchPost();
 
-  }, [isLogin, navigate]);
+  }, [isLogin]);
 
 
   return (
@@ -40,11 +38,11 @@ const Dashboard = () => {
       <div className="container">
         <div className="tw-flex tw-w-full md:tw-items-center md:tw-justify-between tw-justify-start tw-items-start tw-my-5 tw-flex-col md:tw-flex-row tw-gap-4 md:tw-gap-0 tw-px-2 md:tw-px-0">
           <h3 className='md:tw-text-3xl tw-text-xl tw-font-sans tw-tracking-tighter'>
-            Welcome {
+            Welcome, {
               user.name
-                ? user.name
-                : user.email
-            }
+                ? (user.name).split(' ')[0]
+                : 'user'
+            }!
           </h3>
           <Button variant='dark'>
             <Link to='/create' className='tw-font-sans tw-tracking-tighter'>Create Post</Link>

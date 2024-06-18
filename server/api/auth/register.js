@@ -9,8 +9,8 @@ router.post("/register", async (req, res) => {
         const { name, email, password } = req.body;
         const checkMail = await User.findOne({ email });
         if (checkMail) {
-            return res.status(400).json({ 
-                status: 400,
+            return res.status(409).json({ 
+                status: 409,
                 error: "Email Already Exists!!" 
             });
         }

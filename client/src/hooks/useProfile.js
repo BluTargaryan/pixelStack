@@ -10,16 +10,16 @@ export default function useProfile() {
         if (!token) {
             setisLogin(false)
             return;
+        } else {
+            setisLogin(true)
         }
         axios.get("http://localhost:3000/api/auth/profile", {
             withCredentials: true
         })
             .then((res) => {
-                setisLogin(true)
                 setUser(res.data.user)
             })
             .catch((err) => {
-                setisLogin(false)
                 setError(err);
             })
     }, [])

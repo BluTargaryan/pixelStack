@@ -15,7 +15,7 @@ router.get("/getPost", async (req, res) => {
                 message: "User not Authorized"
             });
         }
-        jwt.verify(token, process.env.JWT_SECRET, {}, async (err, decoded) => {
+        jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
             if (err) throw err;
             const posts = await Blog.find().populate('author');
             res.status(200).json({

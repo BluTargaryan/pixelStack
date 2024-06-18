@@ -1,11 +1,24 @@
 import React from 'react'
 import Navbar from '../Components/Navbar'
-import BlogItem from '../Components/BlogItem'
+import axios from 'axios'
+import { useEffect } from 'react'
 
 const Home = () => {
+    const token = localStorage.getItem("token");
+    useEffect(() => {
+        if (token) {
+            axios.get("http://localhost:3000/api/auth/profile", {
+                withCredentials: true
+            }).then((response) => {
+                return window.location.href = '/dashboard';
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+    }, [token]);
     return (
         <>
-            <Navbar navBg={'tw-bg-amber-400'} isLogin={false}/>
+            <Navbar navBg={'tw-bg-amber-400'} isLogin={false} />
             <div className='tw-border-b-[1px] tw-border-b-black'></div>
             <section className='tw-bg-amber-400'>
                 <div className="container tw-py-32">

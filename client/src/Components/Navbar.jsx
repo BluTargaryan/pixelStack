@@ -24,12 +24,12 @@ const Navbar = ({ navBg, isLogin }) => {
             withCredentials: true
         })
             .then((res) => {
-                console.log(res);
+                localStorage.removeItem("token");
                 setLoading(false);
                 setRedirect(true);
             })
             .catch((err) => {
-                console.log(err);
+                setLoading(false);
             })
     }
 
