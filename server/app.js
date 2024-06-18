@@ -21,7 +21,7 @@ const port = process.env.PORT;
 
 app.use(cors(
     {
-        origin: '*',
+        origin: ['https://pixel-stack.vercel.app', 'http://localhost:5173'],
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true
     }

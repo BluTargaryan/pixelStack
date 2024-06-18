@@ -15,6 +15,39 @@ const Login = () => {
   const handleLogin = useCallback(async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    if (!email || !password) {
+      toast.error('Please fill all fields', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Slide,
+      });
+      setLoading(false);
+      return;
+    }
+
+    if(email.includes('@') === false && email.includes('.') === false) {
+      toast.error('Please Enter a Valid Email', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Slide,
+      });
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:3000/api/auth/login', {
         email,
@@ -55,6 +88,7 @@ const Login = () => {
           theme: "light",
           transition: Slide,
         });
+        setLoading(false);
       }
 
       else if (error.response.data.status === 400) {
@@ -69,6 +103,7 @@ const Login = () => {
           theme: "light",
           transition: Slide,
         });
+        setLoading(false);
       }
     }
   }, [email, password]);
@@ -105,6 +140,7 @@ const Login = () => {
                   id={"email"}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
                 <Input
                   label={"Password"}
@@ -112,6 +148,7 @@ const Login = () => {
                   id={"password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
                 <span className='tw-w-full tw-text-center tw-my-4'>
                   <h5>

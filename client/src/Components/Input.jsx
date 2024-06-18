@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Input = ({ onChange, value, label, type, id, align }) => {
+const Input = ({ onChange, value, label, type, id, align, ...props }) => {
     return (
         <>
             <div className=''>
@@ -43,6 +43,7 @@ const Input = ({ onChange, value, label, type, id, align }) => {
                         tw-focus:tw-border-indigo-500
                         tw-text-${align ?? 'center'}`}
                     placeholder=''
+                    {...props}
                 />
 
             </div>
