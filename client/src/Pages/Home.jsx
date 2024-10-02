@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../Components/Navbar'
 import axios from 'axios'
 import { useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 
 const Home = () => {
     const token = localStorage.getItem("token");
@@ -18,6 +19,11 @@ const Home = () => {
     }, [token]);
     return (
         <>
+         <Helmet>
+         <title>Home Page - PixelStack</title>
+         <meta name="title" content="Home Page - PixelStack" />
+         <meta name="description" content="Discover stories, thinking, and expertise from writers on any topic." />
+            </Helmet>
             <Navbar navBg={'tw-bg-amber-400'} isLogin={false} />
             <div className='tw-border-b-[1px] tw-border-b-black'></div>
             <section className='tw-bg-amber-400'>

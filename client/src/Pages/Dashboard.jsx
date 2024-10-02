@@ -5,6 +5,7 @@ import BlogItem from '../Components/BlogItem';
 import Button from '../Components/Button';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
+import { Helmet } from 'react-helmet-async'
 
 const Dashboard = () => {
   const { user, isLogin } = useProfile();
@@ -33,6 +34,11 @@ const Dashboard = () => {
 
   return (
     <>
+    <Helmet>
+    <title>Dashboard - Manage Your Posts on PixelStack</title>
+<meta name="title" content="Dashboard - Manage Your Posts on PixelStack" />
+<meta name="description" content="View and manage your posts on PixelStack. Edit, update, or delete your content and track engagement all in one place." />
+            </Helmet>
       <Navbar isLogin={isLogin} />
       <hr />
       <div className="container">

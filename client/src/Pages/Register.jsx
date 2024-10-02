@@ -5,6 +5,7 @@ import axios from 'axios'
 import { ToastContainer, toast, Slide } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { Navigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 
 const Register = () => {
 
@@ -143,6 +144,12 @@ const Register = () => {
 
     return (
         <React.Fragment>
+
+<Helmet>
+<title>Sign Up - Join PixelStack Today</title>
+<meta name="title" content="Sign Up - Join PixelStack Today" />
+<meta name="description" content="Create your PixelStack account to discover new stories, connect with writers, and enjoy personalized content tailored just for you." />
+            </Helmet>
             <ToastContainer
                 position="top-right"
                 autoClose={3000}

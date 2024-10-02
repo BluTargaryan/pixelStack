@@ -5,6 +5,7 @@ import Button from '../Components/Button';
 import axios from 'axios';
 import { ToastContainer, toast, Slide } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { Helmet } from 'react-helmet-async'
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -114,6 +115,12 @@ const Login = () => {
 
   return (
     <React.Fragment>
+ <Helmet>
+ <title>Login - Access Your PixelStack Account</title>
+ <meta name="title" content="Login - Access Your PixelStack Account" />
+ <meta name="description" content="Log in to your PixelStack account to explore personalized content, manage your profile, and engage with your favorite writers." />
+            </Helmet>
+
       <ToastContainer
         position="top-right"
         autoClose={3000}

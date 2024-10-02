@@ -7,6 +7,7 @@ import { SlLike } from "react-icons/sl";
 import { FaRegComment } from "react-icons/fa6";
 import { CiBookmarkPlus } from "react-icons/ci";
 import { CiShare1 } from "react-icons/ci";
+import { Helmet } from 'react-helmet-async'
 
 const BlogPost = () => {
 
@@ -26,6 +27,11 @@ const BlogPost = () => {
 
     return (
         <>
+        <Helmet>
+        <title>{`Blog Post - ${posts?.data?.title || "Untitled"} | PixelStack`}</title>
+        <meta name="title" content={`Blog Post - ${posts?.data?.title || "Untitled"} | PixelStack`} />
+        <meta name="description" content={posts?.data?.summary || "Read our latest blog post."}/>
+            </Helmet>
             <Navbar isLogin={true} />
             <hr />
             <div className="container tw-my-5">

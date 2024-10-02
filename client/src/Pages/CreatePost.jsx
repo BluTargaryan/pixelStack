@@ -5,6 +5,7 @@ import Editor from '../Components/Editor'
 import Button from '../Components/Button'
 import axios from 'axios'
 import { Navigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 
 const CreatePost = () => {
 
@@ -42,6 +43,11 @@ const CreatePost = () => {
 
     return (
         <div>
+             <Helmet>
+             <title>Create a Post - Share Your Story on PixelStack</title>
+             <meta name="title" content="Create a Post - Share Your Story on PixelStack" />
+             <meta name="description" content="Craft and publish your story on PixelStack. Use our editor to create engaging content, add images, and share your ideas with the world." />
+            </Helmet>
             <Navbar isLogin={true} />
             <hr />
             <div className="container tw-my-4 tw-w-2/4">

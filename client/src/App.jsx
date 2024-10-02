@@ -8,10 +8,12 @@ import BlogPost from "./Components/BlogPost";
 import Explore from "./Pages/Explore";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
+import {HelmetProvider} from 'react-helmet-async'
 
 function App() {
 
   return (
+    <HelmetProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -25,6 +27,7 @@ function App() {
         <Route path="/blog/:id" element={<BlogPost />} />
       </Routes>
     </BrowserRouter>
+    </HelmetProvider>
   );
 }
 
